@@ -1,9 +1,9 @@
-resource "aws_lb_target_group" "alb" {
-  name     = "${var.app-name}-tg"
-  port     = 80
-  protocol = "HTTP"
+resource "aws_lb_target_group" "this" {
+  name        = "${var.app_name}-tg"
+  port        = 80
+  protocol    = "HTTP"
   target_type = "ip"
-  vpc_id   = aws_vpc.main.id
+  vpc_id      = aws_vpc.this.id
 
   health_check {
     interval            = 6
@@ -16,5 +16,5 @@ resource "aws_lb_target_group" "alb" {
     matcher             = 200
   }
 
-  depends_on = [aws_lb.alb]
+  depends_on = [aws_lb.this]
 }

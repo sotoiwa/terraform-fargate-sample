@@ -1,5 +1,5 @@
-resource "aws_ecs_task_definition" "ecs" {
-  container_definitions    = <<EOF
+resource "aws_ecs_task_definition" "nginx" {
+  container_definitions = <<EOF
 [
   {
     "command"               : [],
@@ -15,14 +15,14 @@ resource "aws_ecs_task_definition" "ecs" {
     "logConfiguration"      : {
       "logDriver" : "awslogs",
       "options"   : {
-        "awslogs-group"         : "${var.app-name}",
-        "awslogs-region"        : "ap-northeast-1",
+        "awslogs-group"         : "${var.app_name}",
+        "awslogs-region"        : "${data.aws_region.this.name}",
         "awslogs-stream-prefix" : "logs"
       }
     },
     "memory"                : 512,
     "mountPoints"           : [],
-    "name"                  : "${var.app-name}",
+    "name"                  : "${var.app_name}",
     "portMappings"          : [
       {
         "containerPort" : 80,
@@ -37,8 +37,8 @@ resource "aws_ecs_task_definition" "ecs" {
 EOF
 
   cpu                      = "256"
-  execution_role_arn       = aws_iam_role.ecs-task-execution-role.arn
-  family                   = var.app-name
+  execution_role_arn       = aws_iam_role.ecs_task_execution.arn
+  family                   = var.app_name
   memory                   = "512"
   network_mode             = "awsvpc"
   requires_compatibilities = ["FARGATE"]

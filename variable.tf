@@ -1,3 +1,3 @@
-variable "app-name" {
-  default = "terraform-fargate-sample"
+variable "app_name" {
+  default = "fargate-sample"
 }

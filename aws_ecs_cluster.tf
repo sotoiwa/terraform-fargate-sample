@@ -1,8 +1,8 @@
-resource "aws_ecs_cluster" "ecs-cluster" {
-  name               = "${var.app-name}-cluster"
+resource "aws_ecs_cluster" "this" {
+  name               = "${var.app_name}-cluster"
   capacity_providers = []
   tags = {
-    "Name" = "${var.app-name}-cluster"
+    "Name" = "${var.app_name}-cluster"
   }
 
   setting {
