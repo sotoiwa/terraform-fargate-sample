@@ -1,9 +1,10 @@
 resource "aws_lb_target_group" "this" {
-  name        = "${var.app_name}-tg"
-  port        = 80
-  protocol    = "HTTP"
-  target_type = "ip"
-  vpc_id      = aws_vpc.this.id
+  name                 = "${var.app_name}-tg"
+  port                 = 80
+  protocol             = "HTTP"
+  target_type          = "ip"
+  vpc_id               = aws_vpc.this.id
+  deregistration_delay = 30
 
   health_check {
     interval            = 6

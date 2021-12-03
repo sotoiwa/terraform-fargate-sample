@@ -2,10 +2,11 @@ resource "aws_ecs_service" "nginx" {
   name                               = "${var.app_name}-service"
   cluster                            = aws_ecs_cluster.this.id
   task_definition                    = var.app_name
-  desired_count                      = 10
+  desired_count                      = 2
   deployment_maximum_percent         = 200
   deployment_minimum_healthy_percent = 100
   enable_ecs_managed_tags            = false
+  enable_execute_command             = true
   health_check_grace_period_seconds  = 0
   launch_type                        = "FARGATE"
   platform_version                   = "1.4.0"

@@ -10,7 +10,7 @@ resource "aws_ecs_task_definition" "nginx" {
     "entryPoint"            : [],
     "environment"           : [],
     "essential"             : true,
-    "image"                 : "nginx:latest",
+    "image"                 : "nginx",
     "links"                 : [],
     "logConfiguration"      : {
       "logDriver" : "awslogs",
@@ -38,7 +38,8 @@ EOF
 
   cpu                      = "256"
   execution_role_arn       = aws_iam_role.ecs_task_execution.arn
-  family                   = var.app_name
+  task_role_arn            = aws_iam_role.ecs_task.arn
+  family                   = "${var.app_name}-taskdef"
   memory                   = "512"
   network_mode             = "awsvpc"
   requires_compatibilities = ["FARGATE"]
