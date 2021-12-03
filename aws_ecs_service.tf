@@ -1,7 +1,7 @@
 resource "aws_ecs_service" "nginx" {
   name                               = "${var.app_name}-service"
   cluster                            = aws_ecs_cluster.this.id
-  task_definition                    = var.app_name
+  task_definition                    = aws_ecs_task_definition.nginx.arn
   desired_count                      = 2
   deployment_maximum_percent         = 200
   deployment_minimum_healthy_percent = 100
