@@ -1,20 +1,20 @@
 # タスク実行ロール
 resource "aws_iam_role" "ecs_task_execution" {
-  name               = "${var.app_name}-ecs-task-execution-role"
-  assume_role_policy = <<EOF
-{
-  "Version": "2008-10-17",
-  "Statement": [
-    {
-      "Action": "sts:AssumeRole",
-      "Principal": {
-        "Service": "ecs-tasks.amazonaws.com"
+  name = "${var.app_name}-ecs-task-execution-role"
+
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action = "sts:AssumeRole"
+        Effect = "Allow"
+        Sid    = ""
+        Principal = {
+          Service = "ecs-tasks.amazonaws.com"
+        }
       },
-      "Effect": "Allow"
-    }
-  ]
-}
-EOF
+    ]
+  })
 }
 
 resource "aws_iam_role_policy_attachment" "ecs_task_execution" {
@@ -24,21 +24,21 @@ resource "aws_iam_role_policy_attachment" "ecs_task_execution" {
 
 # タスクロール
 resource "aws_iam_role" "ecs_task" {
-  name               = "${var.app_name}-ecs-task-role"
-  assume_role_policy = <<EOF
-{
-  "Version": "2008-10-17",
-  "Statement": [
-    {
-      "Action": "sts:AssumeRole",
-      "Principal": {
-        "Service": "ecs-tasks.amazonaws.com"
+  name = "${var.app_name}-ecs-task-role"
+
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action = "sts:AssumeRole"
+        Effect = "Allow"
+        Sid    = ""
+        Principal = {
+          Service = "ecs-tasks.amazonaws.com"
+        }
       },
-      "Effect": "Allow"
-    }
-  ]
-}
-EOF
+    ]
+  })
 }
 
 data "aws_iam_policy_document" "ecs_exec" {
