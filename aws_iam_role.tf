@@ -41,19 +41,6 @@ resource "aws_iam_role" "ecs_task" {
   })
 }
 
-data "aws_iam_policy_document" "ecs_exec" {
-  version = "2012-10-17"
-  statement {
-    actions = [
-      "ssmmessages:CreateControlChannel",
-      "ssmmessages:CreateDataChannel",
-      "ssmmessages:OpenControlChannel",
-      "ssmmessages:OpenDataChannel"
-    ]
-    resources = ["*"]
-  }
-}
-
 resource "aws_iam_policy" "ecs_exec" {
   name   = "${var.app_name}-ecs-exec"
   policy = <<EOF
