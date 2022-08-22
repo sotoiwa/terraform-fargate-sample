@@ -36,8 +36,4 @@ resource "aws_ecs_service" "nginx" {
       load_balancer,
     ]
   }
-
-  depends_on = [
-    aws_lb_target_group.this
-  ]
 }
